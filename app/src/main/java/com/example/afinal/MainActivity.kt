@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
         mAuth = FirebaseAuth.getInstance()
 
@@ -53,6 +54,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+
         registerButton.setOnClickListener {
 
             val email = emailInput.text.toString()
@@ -64,10 +66,12 @@ class MainActivity : AppCompatActivity() {
 
             }
 
+
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener {task ->
                         if (task.isSuccessful){
-                            gotoBMI()
+                            startActivity(Intent(this, MainActivity::class.java ))
+                            finish()
 
                         } else{
                             Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()
